@@ -25,5 +25,5 @@ details:
     runs-on: ubuntu-latest
     steps:
         - name: show the version of python, docker, linux, etc
-         run: docker --version && python --version && Linux --version
+          run: docker --version && python --version && Linux --version
            
