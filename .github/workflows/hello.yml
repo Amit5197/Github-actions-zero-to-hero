@@ -1,29 +1,47 @@
-# This is workflow name
+# Name of the worflow
+name: hello worflow
 
-name: Hello DevOps
-
-# runs on a trigger
+# Trigger the workflow on every push
 on:
-    push:
-        branches: [main]
+  push:
+    branches:
+      - main
 
-# these are jobs inside the workflow
+# Define the jobs that will run in this workflow
 jobs:
+  greet:
 
-    # this is the name of the job
-    greet:
-       # this is the github runner
-        runs-on: ubuntu-latest
-        steps:
-           - name: say hello to users
-             run: echo "Hello DevOps" 
+    # specify the runner environment
+    runs-on: ubuntu-latest
+    
+    # Steps represents of tasks executed as a part of the job
+    steps:
+      # Step 1: Checkout the repository 
+      - name: Check repository
+        uses: actions/checkout@v4
+        
+      # Step 2: Print greeting
+      - name: Print greeting
+        run: echo "Hello from GitHub Actions!"
 
-           - name: say Hello to username
-             run: echo "Hello $Users"
-   
-    details:
-        runs-on: ubuntu-latest
-        steps:
-          - name: show the version of python, docker, etc
-            run: docker --version && python --version 
-           
+      # Step 3: Print the current date and time
+      - name: Print the current date and time
+        run: date
+
+      # Step 4: Print branch name
+      - name: Print branch name
+        run: |
+          echo "Triggered by branch: ${{ github.ref_name }}"
+
+      # Step 5 List repo file
+      - name: List repo files
+        run: ls -la
+
+      # Step 6 Print runner operating system
+      - name: Print runner OS
+        run: |
+          echo "Runner OS: ${{ runner.os}}"
+
+      # Step 6 Intentionally fail    
+      # - name: Break the workflow on purpose
+      #   run: exit 1
